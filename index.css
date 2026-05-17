@@ -1,0 +1,532 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #1f2937;
+}
+
+.app {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  transition: background-image 0.35s ease;
+  padding: 24px;
+}
+
+.shell {
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.header,
+.panel {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  padding: 20px;
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+}
+
+.header h1 {
+  margin: 0 0 8px;
+}
+
+.header p {
+  margin: 0;
+  opacity: 0.75;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  margin: 18px 0;
+  padding-bottom: 6px;
+}
+
+.tab {
+  flex: 0 0 auto;
+  border: 0;
+  background: rgba(255,255,255,0.86);
+  padding: 12px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s;
+}
+
+.tab:hover {
+  transform: translateY(-2px);
+}
+
+.tab.active {
+  background: #2563eb;
+  color: #fff;
+  box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
+}
+
+.toolbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.toolbar input {
+  flex: 1 1 220px;
+  padding: 12px 14px;
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+}
+
+.btn,
+.card-actions button,
+.card-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  background: #2563eb;
+  color: #fff;
+  text-decoration: none;
+  padding: 9px 12px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.btn:hover,
+.card-actions button:hover,
+.card-actions a:hover {
+  transform: translateY(-1px);
+  opacity: 0.92;
+}
+
+.message {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  color: #1d4ed8;
+  padding: 10px 12px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+}
+
+.grid,
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 14px;
+}
+
+.card {
+  min-width: 0;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 12px;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+  animation: cardIn 0.25s ease both;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 28px rgba(15, 23, 42, 0.15);
+}
+
+.card h3 {
+  font-size: 15px;
+  margin: 10px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-image {
+  width: 100%;
+  height: 135px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #e5e7eb;
+}
+
+.file-icon {
+  height: 135px;
+  display: grid;
+  place-items: center;
+  background: #f3f4f6;
+  border-radius: 12px;
+  font-size: 48px;
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.card-actions .danger {
+  background: #dc2626;
+}
+
+.empty {
+  padding: 26px;
+  text-align: center;
+  color: #6b7280;
+}
+
+.skeleton {
+  height: 210px;
+  border-radius: 16px;
+  background: linear-gradient(90deg, #f3f4f6, #e5e7eb, #f3f4f6);
+  background-size: 200% 100%;
+  animation: skeleton 1.2s infinite;
+}
+
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.72);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 30px 14px;
+  overflow: auto;
+}
+
+.modal {
+  width: min(1000px, 96vw);
+  background: #fff;
+  border-radius: 18px;
+  padding: 18px;
+  animation: modalIn 0.22s ease both;
+}
+
+.modal-header {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.modal-header h2 {
+  min-width: 0;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.modal-header button {
+  border: 0;
+  background: #ef4444;
+  color: white;
+  font-size: 24px;
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.preview-frame {
+  width: 100%;
+  height: 70vh;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.table-preview {
+  overflow: auto;
+  max-height: 70vh;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+}
+
+.table-preview table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-preview td {
+  border: 1px solid #e5e7eb;
+  padding: 8px;
+}
+
+/* Уведомления (toast) */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10000;
+  min-width: 260px;
+  max-width: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8fafc;
+  border-left: 4px solid #3b82f6;
+  border-radius: 8px;
+  padding: 12px 16px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+  font-size: 14px;
+}
+
+.notification.success {
+  border-left-color: #10b981;
+}
+.notification.error {
+  border-left-color: #ef4444;
+}
+.notification button {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 18px;
+  margin-left: 8px;
+  cursor: pointer;
+}
+
+/* Спиннер для индикации загрузки */
+.spinner {
+  border: 3px solid #e5e7eb;
+  border-top-color: #2563eb;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: spin 1s linear infinite;
+  margin-left: 8px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Фокус видим для клавиатурной навигации */
+button:focus,
+input:focus,
+select:focus,
+a:focus {
+  outline: 2px solid #2563eb;
+  outline-offset: 2px;
+}
+
+/* Ссылка для пропуска к основному содержанию */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: #ffffff;
+  color: #2563eb;
+  padding: 8px 12px;
+  border-radius: 0 0 6px 0;
+  text-decoration: none;
+  z-index: 10000;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Поля с ошибкой */
+.error-field {
+  border-color: #dc2626 !important;
+}
+
+.error-message {
+  color: #dc2626;
+  margin-top: 6px;
+  font-size: 14px;
+}
+
+/* Стили для карточки строительного проекта и управления фоном */
+.project-card {
+  background: rgba(255, 255, 255, 0.86);
+  backdrop-filter: blur(8px);
+  border-radius: 18px;
+  padding: 18px;
+  margin: 20px 0;
+  box-shadow: 0 8px 18px rgba(15, 23, 42, 0.08);
+}
+
+.project-card h2 {
+  margin: 0 0 8px;
+}
+
+.project-info p {
+  margin: 4px 0;
+}
+
+.project-card .edit-btn {
+  margin-top: 12px;
+  background: #2563eb;
+  color: #fff;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.project-card .edit-btn:hover {
+  opacity: 0.92;
+}
+
+.project-edit .form-group {
+  margin-bottom: 12px;
+}
+
+.project-edit .form-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.project-edit .form-group input,
+.project-edit .form-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+}
+
+.project-edit .form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.backgrounds-section {
+  margin-top: 20px;
+}
+
+.backgrounds-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.background-thumb {
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  transition: border-color 0.2s;
+}
+
+.background-thumb img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 10px;
+  display: block;
+}
+
+.background-thumb.selected {
+  border-color: #2563eb;
+}
+
+/* Контейнер для элемента фона, чтобы разместить кнопку удаления поверх */
+.background-item {
+  position: relative;
+  display: inline-block;
+}
+
+/* Кнопка удаления фонового изображения */
+.delete-background-btn {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 20px;
+  height: 20px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 14px;
+  line-height: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.delete-background-btn:hover {
+  background: rgba(220, 38, 38, 0.8);
+}
+
+/* Секции для отображения PDF и Word документов */
+.doc-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.doc-block h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+}
+
+.doc-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.background-upload {
+  margin-top: 14px;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(8px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(14px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes skeleton {
+  0% { background-position: 0% 0; }
+  100% { background-position: -200% 0; }
+}
+
+@media (max-width: 640px) {
+  .app {
+    padding: 12px;
+  }
+
+  .header,
+  .panel {
+    padding: 14px;
+    border-radius: 14px;
+  }
+
+  .grid,
+  .skeleton-grid {
+    grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+    gap: 10px;
+  }
+
+  .card-image,
+  .file-icon {
+    height: 105px;
+  }
+
+  .card-actions {
+    flex-direction: column;
+  }
+
+  .card-actions button,
+  .card-actions a {
+    width: 100%;
+  }
+}
